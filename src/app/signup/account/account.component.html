@@ -1,0 +1,21 @@
+<form #formPersonal [formGroup]="_formGroup" id="input" >
+    <div class="form-card">
+        <div class="row">
+            <div class="col-7">
+                <h2 class="fs-title">Account Information:</h2>
+            </div>
+            <div class="col-5">
+                <h2 class="steps">Step 1 - 4</h2>
+            </div>
+        </div> 
+        <label class="fieldlabels">Email: *</label> 
+        <input type="email" formControlName="email" placeholder="Email Id" /> 
+        <label class="fieldlabels">Username: *</label> 
+        <input type="text" formControlName="uname" placeholder="UserName" /> 
+        <label class="fieldlabels">Password: *</label> 
+        <input type="password" formControlName="pwd" placeholder="Password" /> 
+        <label class="fieldlabels">Confirm Password: *</label> 
+        <input type="password" formControlName="cpwd" placeholder="Confirm Password" />
+    </div> 
+    <input type="button" name="next" class="next action-button" value="Next" (click)="nextButton()"/>
+</form>

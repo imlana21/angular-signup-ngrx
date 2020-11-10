@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "signup-app"
+    }
+  },
+  "defaultProject": "signup-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
