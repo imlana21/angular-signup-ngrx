@@ -11,5 +11,12 @@ export class SuccessComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  nextButton(): void {
 
+  }
+
+  prevButton(): void {
+    
+  }
 }

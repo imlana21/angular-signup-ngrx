@@ -1,0 +1,67 @@
+#progress-bar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+
+    .active {
+        color: #673AB7
+    }
+
+    li {
+        list-style-type: none;
+        font-size: 15px;
+        width: 25%;
+        float: left;
+        position: relative;
+        font-weight: 400
+    }
+
+    #account:before {
+        font-family: FontAwesome;
+        content: "\f13e"
+    }
+    
+    #personal:before {
+        font-family: FontAwesome;
+        content: "\f007"
+    }
+    
+    #payment:before {
+        font-family: FontAwesome;
+        content: "\f030"
+    }
+
+    #confirm:before {
+        font-family: FontAwesome;
+        content: "\f00c"
+    }
+    
+    li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px
+    }
+
+    li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1
+    }
+    
+    li.active:before,
+    li.active:after {
+        background: #673AB7
+    }
+}

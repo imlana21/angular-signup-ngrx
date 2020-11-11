@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-personal',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./personal.component.scss']
 })
 export class PersonalComponent implements OnInit {
+  public _formGroup: FormGroup;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this._formGroup = this.formBuilder.group({
+    })
   }
 
+  nextButton(): void {
+    
+  }
+
+  prevButton(): void {
+    
+  }
 }
