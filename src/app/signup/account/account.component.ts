@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,10 +8,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class AccountComponent implements OnInit {
   public _formGroup: FormGroup;
+  @Input() percentBar: number;
 
   constructor(
     private formBuilder: FormBuilder
   ) {
+    this.percentBar = 1;
     this._formGroup = this.formBuilder.group({
       email: new FormControl(null),
       uname: new FormControl(null),

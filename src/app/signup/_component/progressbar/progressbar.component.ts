@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,7 +9,7 @@ import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class ProgressbarComponent {
-  percentBar = 1;
+  @Output() percentBar: number;
 
   constructor(
     private barConfig: NgbProgressbarConfig
