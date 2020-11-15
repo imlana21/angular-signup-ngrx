@@ -19,7 +19,8 @@ import { SuccessComponent } from './success/success.component';
     AccountComponent, 
     ImageComponent, 
     PersonalComponent, 
-    SuccessComponent, ProgressbarComponent
+    SuccessComponent, 
+    ProgressbarComponent
   ],
   imports:[
     CommonModule,
@@ -33,7 +34,8 @@ import { SuccessComponent } from './success/success.component';
     PersonalComponent,
     AccountComponent,
     ImageComponent,
-    SuccessComponent
+    SuccessComponent,
+    ProgressbarComponent
   ]
 })
 export class SignupModule { }
