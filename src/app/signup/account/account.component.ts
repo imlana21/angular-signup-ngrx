@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Signup } from 'src/app/models/signup';
 import { addUsers } from '../store/action/signup.actions';
@@ -16,7 +17,8 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<UserState>
+    private store: Store<UserState>,
+    private router: Router
   ) {
     this._formGroup = this.formBuilder.group({
       email: new FormControl(null),
@@ -31,7 +33,9 @@ export class AccountComponent implements OnInit {
 
   nextButton(): void {
     const users = new Signup();
+    users.account = this._formGroup.value;
     this.store.dispatch(addUsers(users));
+    this.router.navigate(['signup/personal']);
   }
 
   ngAfterViewInit(): void {
