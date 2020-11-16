@@ -1,7 +1,7 @@
 import { state } from '@angular/animations';
 import { Action, createReducer, on } from '@ngrx/store';
 import { Signup } from '../../../models/signup';
-import * as SignupAction from '../action/user.actions'
+import * as SignupAction from '../action/signup.actions'
 
 
 export const userFeatureKey = 'user';

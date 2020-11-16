@@ -3,8 +3,8 @@ import { NgbProgressbarConfig } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Signup } from '../../../models/signup';
-import { UserState } from '../../store/reducer/user.reducer';
-import { selectSignup } from '../../store/selector/user.selectors';
+import { UserState } from '../../store/reducer/signup.reducer';
+import { selectSignup } from '../../store/selector/signup.selectors';
 
 @Component({
   selector: 'app-progressbar',

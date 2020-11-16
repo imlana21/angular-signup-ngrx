@@ -1,6 +1,6 @@
 import { Form } from '@angular/forms';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromSignup from '../reducer/user.reducer';
+import * as fromSignup from '../reducer/signup.reducer';
 
 export const selectSignupState = createFeatureSelector<fromSignup.UserState>(
     fromSignup.userFeatureKey
