@@ -9,5 +9,4 @@ export class Signup {
     phno_2 = '';
     pic = '';
     spic = '';
-    progressBar = 1;
 }

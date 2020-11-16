@@ -8,5 +8,5 @@ export const selectSignupState = createFeatureSelector<fromSignup.UserState>(
 
 export const selectSignup = createSelector(
     selectSignupState,
-    (state: fromSignup.UserState) => state.user
+    (state: fromSignup.UserState) => state.signup
 )

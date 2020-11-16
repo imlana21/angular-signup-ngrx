@@ -7,21 +7,21 @@ import * as SignupAction from '../action/user.actions'
 export const userFeatureKey = 'user';
 
 export interface UserState {
-  user: Signup[]
+  signup: Signup[]
 }
 
 export const initialState: UserState = {
-  user: []
+  signup: []
 };
 
 
 export const userReducer = createReducer(
   initialState,
   on(SignupAction.addUsers,
-    (state: UserState, {user}) => ({
+    (state: UserState, {signup}) => ({
       ...state,
       user: [
-        ...state.user, user
+        ...state.signup, signup
       ]
     })
     )

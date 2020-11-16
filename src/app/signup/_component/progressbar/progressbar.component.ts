@@ -14,7 +14,8 @@ import { selectSignup } from '../../store/selector/user.selectors';
 })
 
 export class ProgressbarComponent {
-  progressNumber: Observable<Signup[]>
+  progressNumber: any;
+  observable$: Observable<Signup[]>;
 
   constructor(
     private barConfig: NgbProgressbarConfig,
@@ -25,7 +26,7 @@ export class ProgressbarComponent {
     this.barConfig.striped = true;
     this.barConfig.animated = true;
     this.barConfig.height = '20px';
-    this.progressNumber = this.store.pipe(select(selectSignup));
-    console.log(this.progressNumber)
+    this.progressNumber = 1;
+    this.observable$ = this.store.pipe(select(selectSignup));
   }
 }
