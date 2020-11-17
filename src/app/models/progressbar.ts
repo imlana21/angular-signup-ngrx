@@ -1,3 +1,3 @@
-export class Progressbar {
-    progress = '';
+export interface Progressbar {
+    progress: number
 }

@@ -1,5 +1,5 @@
-export class Signup {
-    account = {};
-    personal = {};
-    image = {};
+export interface Signup {
+    personal: {};
+    account: {};
+    image: {};
 }
