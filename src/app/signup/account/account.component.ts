@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Signup } from 'src/app/models/signup';
 
 @Component({
   selector: 'app-account',
@@ -9,11 +12,12 @@ import { Router } from '@angular/router';
 })
 export class AccountComponent implements OnInit {
   public _formGroup: FormGroup;
-  
+  user$: Observable<{}>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<Signup>
   ) {
     this._formGroup = this.formBuilder.group({
       email: new FormControl(null),
@@ -24,9 +28,11 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user$ = this.store.select('account')
   }
 
   nextButton(): void {
+    this.store.dispatch
     this.router.navigate(['signup/personal']);
   }
 
