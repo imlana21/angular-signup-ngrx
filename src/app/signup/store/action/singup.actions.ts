@@ -5,15 +5,18 @@ export const loadSingups = createAction(
 );
 
 export const addAccount = createAction(
-  '[Signup] Add Account Detail'
+  '[Signup] Add Account Detail',
+  //props<{account: any}>()
 )
 
 export const addPersonal = createAction(
-  '[Signup] Add Personal Detail'
+  '[Signup] Add Personal Detail',
+  //props<{personal: any}>()
 )
 
 export const addImage = createAction(
-  '[Signup] Add Image'
+  '[Signup] Add Image',
+  //props<{image: any}>()
 )
 
 //export const setScores = createAction('[Scoreboard Page] Set Scores', props<{game: Game}>());
