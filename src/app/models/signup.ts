@@ -1,5 +1,5 @@
 export interface Signup {
-    personal: {};
-    account: {};
-    image: {};
+    personal: any;
+    account: any;
+    image: any;
 }

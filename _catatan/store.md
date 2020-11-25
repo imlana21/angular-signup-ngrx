@@ -118,6 +118,7 @@ Ketika menulis reducers, perhatikan :
   ```ts
     const scoreboardReducer = createReducer(
       initialState,
+      // ...state adalah spread variabel. Untuk memberikan data berupa array
       on(ScoreboardPageActions.homeScore, state => ({ ...state, home: state.home + 1 })),
       on(ScoreboardPageActions.awayScore, state => ({ ...state, away: state.away + 1 })),
       on(ScoreboardPageActions.resetScore, state => ({ home: 0, away: 0 })),
@@ -129,6 +130,181 @@ Ketika menulis reducers, perhatikan :
     }
   ```
 
-  > Dari contoh diatas, reducers akan mengangani 4 action. Setiap action akan menangani transisi state tanpa ada perubahan, tapi action akan mengembalikan state berupa object menggunakan spread operator. Spread opertor menyalin setiap fungsi dari state kedalam object dan membuat references baru. 
+  > Dari contoh diatas, reducers akan mengangani 4 action. Setiap action akan menangani transisi state tanpa ada perubahan, tapi action akan mengembalikan state berupa object menggunakan spread operator. Spread opertor menyalin setiap fungsi dari state kedalam object dan membuat references baru. Setiap perubahan yang terjadi pada state akan disimpan dan referensi lama akan dihapus.
+
+  > Saat action diterima maka reducer akan menerima action tersebut dan menjalankan fungsi didalam on berdasarkan action yang diterima
+
++ Mendaftarkan root State didalam Module
+  > Untuk mendaftarkan Global Store kita dapat menggunakan method StoreModule.forRoot () didalam imports
   
-+ 
+  `StoreModule.forRoot({ game: fromScoreboard.reducer })`
+  
++ Register Feature State
+  > Feature states berperilaku dengan cara yang sama seperti Root states. Perbedaannya adalah, feature state dikhususkan untuk area tertentu dan biasanya diletakan pada common module. Sedangkan root state diletakan pada app.module atau root module dan berlaku untuk global.
+
+  ```ts
+    // scoreboard.reducer.ts
+
+    export const scoreboardFeatureKey = 'game';
+  ```
+
+  ```ts
+    // scoreboard.module.ts (common module)
+
+    import { NgModule } from '@angular/core';
+    import { StoreModule } from '@ngrx/store';
+    import * as fromScoreboard from './reducers/scoreboard.reducer';
+
+    @NgModule({
+      imports: [
+        StoreModule.forFeature(fromScoreboard.scoreboardFeatureKey, fromScoreboard.reducer)
+      ],
+    })
+    export class ScoreboardModule {}
+  ```
+
+  ```ts
+    // app.module.ts (root module)
+
+    import { NgModule } from '@angular/core';
+    import { StoreModule } from '@ngrx/store';
+    import { ScoreboardModule } from './scoreboard/scoreboard.module';
+
+    @NgModule({
+      imports: [
+        StoreModule.forRoot({}),
+        // Import common module
+        ScoreboardModule
+      ],
+    })
+    export class AppModule {}
+  ```
+
+  Hasilnya :
+  ```json
+    {
+      game: { home: 0, away: 0 }
+    }
+  ```
+
+# Effects
+
+
+# Selector
+
+Merupakan fungsi yang digunakan untuk memilih bagian data dari seluruh data yanda ada di state/ Selector menyediakan banyak fitur untuk mendorong hal tersebut, yaitu :
+
+1. Probability
+2. Memoization
+3. Composition
+4. Testability
+5. Type Safety
+
+Contoh selector dengan 1 state: 
+
+```ts
+    // selector/index.ts
+
+    import { createSelector } from '@ngrx/store';
+    
+    export interface FeatureState {
+      counter: number;
+    }
+    
+    export interface AppState {
+      feature: FeatureState;
+    }
+    
+    export const selectFeature = (state: AppState) => state.feature;
+    
+    export const selectFeatureCount = createSelector(
+      selectFeature,
+      (state: FeatureState) => state.counter
+    );
+```
+
+Contoh selector 2 state :
+
+```ts
+    // selector/index.ts
+    import { createSelector } from '@ngrx/store';
+
+    export interface User {
+      id: number;
+      name: string;
+    }
+
+    export interface Book {
+      id: number;
+      userId: number;
+      name: string;
+    }
+
+    export interface AppState {
+      selectedUser: User;
+      allBooks: Book[];
+    }
+
+    export const selectUser = (state: AppState) => state.selectedUser;
+    export const selectAllBooks = (state: AppState) => state.allBooks;
+
+    export const selectVisibleBooks = createSelector(
+      selectUser,
+      selectAllBooks,
+      (selectedUser: User, allBooks: Book[]) => {
+        if (selectedUser && allBooks) {
+          return allBooks.filter((book: Book) => book.userId === selectedUser.id);
+        } else {
+          return allBooks;
+        }
+      }
+    );
+```
+
+***Catatan : ***
+
+1. Ketika anda menggunakan fungsi *createSelector* dan *createFeatureSelector* maka ngrx/store akan merecord setiap argument terbaru yang dipanggil.
+2. *createSelector* dapat digunakan untuk memilih data dari state based pada state yang sama
+3. *createSelector* dapat manangani 8 selector function
+4. 
+
+## props
+
+Kita bisa mengunakan props untuk memilih bagian dari state berdasarkan data yang tidak tersedia didalam store. props dapat diteruskan pada selector function. Contoh : 
+
+```ts
+    // selector/index.ts
+    export const getCount = createSelector(
+      getCounterValue,
+      (counter, props) => counter * props.multiply
+    );
+```
+
+```ts
+    // app.component.ts
+    ngOnInit() {
+      this.counter = this.store.select(fromRoot.getCount, { multiply: 2 })
+    }
+```
+
+Selector menyimpan argument input di cache-nya. Jika ada data baru yang masuk kemungkina selector juga akan menimpanya. Nahh, kita dapat mengakalinya dengan kode dibawah : 
+
+```ts
+    // index.ts
+    export const getCount = () =>
+      createSelector(
+        (state, props) => state.counter[props.id],
+        (counter, props) => counter * props.multiply
+      );
+```
+
+Fungsi diatas sekarang kita panggil sebagai Factory Function untuk membuat selector function yang berbeda : 
+
+```ts
+    // app.component.ts
+    ngOnInit() {
+      this.counter2 = this.store.select(fromRoot.getCount(), { id: 'counter2', multiply: 2 });
+      this.counter4 = this.store.select(fromRoot.getCount(), { id: 'counter4', multiply: 4 });
+      this.counter6 = this.store.select(fromRoot.getCount(), { id: 'counter6', multiply: 6 });
+    }
+```

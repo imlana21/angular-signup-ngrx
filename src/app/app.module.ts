@@ -21,10 +21,10 @@ import * as fromSignupReducer from './signup/store/reducer/singup.reducer';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({signup: fromSignupReducer.reducer}, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forFeature('signup', fromSignupReducer.reducer),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     AppRoutingModule,
     SignupModule,

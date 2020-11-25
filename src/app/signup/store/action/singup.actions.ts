@@ -11,7 +11,7 @@ export const addAccount = createAction(
 
 export const addPersonal = createAction(
   '[Signup] Add Personal Detail',
-  //props<{personal: any}>()
+  props<{personal: any}>(),
 )
 
 export const addImage = createAction(
