@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../reducer/singup.reducer';
 import { Signup } from '../../../models/signup';
 
 export interface Personal {
@@ -13,11 +12,19 @@ export interface AppState {
     userPersonal: Personal;
 }
 
-export const getPersonal =(state: AppState) => state.userPersonal;
+// getter
+export const getPersonalState =(state: AppState) => state.userPersonal;
 
-export const getActiveSignup = createSelector(
-    getPersonal,
-    (userPersonal: Personal) => {
-        console.log(userPersonal);
+export const personalFeatureState = createFeatureSelector<AppState>('personal');
+
+export const getActivePersonal = createSelector(
+    personalFeatureState,
+    getPersonalState
+)
+
+export const getPersonalData = createSelector(
+    getActivePersonal,
+    data => {
+        console.log(data)
     }
 )
