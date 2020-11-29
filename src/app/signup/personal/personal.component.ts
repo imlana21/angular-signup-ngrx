@@ -34,7 +34,7 @@ export class PersonalComponent implements OnInit {
 
   nextButton(): void {
     this.store.dispatch(addPersonal(this._formGroup.value))
-    //this.router.navigate(['signup/image']); 
+    this.router.navigate(['signup/image']); 
   }
 
   prevButton(): void {

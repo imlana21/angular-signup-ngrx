@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as SignupAction from '../action/singup.actions';
 import { Signup } from '../../../models/signup';
+import { state } from '@angular/animations';
 
 
 export const singupFeatureKey = 'singup';
@@ -30,7 +31,12 @@ export const signupReducer = createReducer(
     SignupAction.addAccount, 
     (state, data) => ({
       ...state, 
-      account: state.account 
+      account: {
+        email: data.email,
+        uname: data.uname,
+        pwd: data.pwd,
+        cpwd: data.cpwd
+      } 
     })
   ),
   on(
@@ -38,16 +44,25 @@ export const signupReducer = createReducer(
     (state, data) => ({
       ...state, 
       personal: {
-        fname: data.fname, lname: data.lname, phno: data.phno, phno_2: data.phno_2
+        fname: data.fname, 
+        lname: data.lname, 
+        phno: data.phno, 
+        phno_2: data.phno_2
       } 
     }
   )),
-  on(SignupAction.addAccount, state => ({...state, image: state.image })),
+  on(
+    SignupAction.addImage,
+    (state, data) => ({
+      ...state,
+      image: {
+        pic: data.pic,
+        sigpic: data.sigpic
+      }
+    })
+  ),
 );
 
 export function reducer(state: Signup, action: Action) {
-  console.log(action);
-  //console.log(state);
-  console.log(signupReducer(state, action));
   return signupReducer(state, action);
 }

@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Signup } from 'src/app/models/signup';
+import { Signup } from '../../models/signup';
+import { addAccount } from '../store/action/singup.actions';
 
 @Component({
   selector: 'app-account',
@@ -12,7 +12,6 @@ import { Signup } from 'src/app/models/signup';
 })
 export class AccountComponent implements OnInit {
   public _formGroup: FormGroup;
-  user$: Observable<{}>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,11 +27,10 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user$ = this.store.select('account')
   }
 
   nextButton(): void {
-    this.store.dispatch
+    this.store.dispatch(addAccount(this._formGroup.value));
     this.router.navigate(['signup/personal']);
   }
 

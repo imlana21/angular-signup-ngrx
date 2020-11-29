@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Signup } from '../../models/signup';
+import { addImage } from '../store/action/singup.actions';
 
 @Component({
   selector: 'app-image',
@@ -12,7 +15,8 @@ export class ImageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<Signup>
   ) {
     this._formGroup = this.formBuilder.group({
       pic: new FormControl(null), 
@@ -24,7 +28,9 @@ export class ImageComponent implements OnInit {
   }
 
   nextButton(): void {
-    this.router.navigate(['signup/success']); 
+    console.log(this._formGroup.value);
+    this.store.dispatch(addImage(this._formGroup.value));
+    //this.router.navigate(['signup/success']); 
   }
 
   prevButton(): void {
