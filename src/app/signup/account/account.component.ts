@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Signup } from '../../models/signup';
 import { addAccount } from '../store/action/singup.actions';
+import * as progressAction from '../store/action/progressbar.actions';
 
 @Component({
   selector: 'app-account',
@@ -30,6 +31,7 @@ export class AccountComponent implements OnInit {
   }
 
   nextButton(): void {
+    this.store.dispatch(progressAction.incProgressbars());
     this.store.dispatch(addAccount(this._formGroup.value));
     this.router.navigate(['signup/personal']);
   }

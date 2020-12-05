@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Signup } from '../../models/signup';
 import { addPersonal } from '../store/action/singup.actions';
+import * as progressAction from '../store/action/progressbar.actions';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class PersonalComponent implements OnInit {
   }
 
   nextButton(): void {
+    this.store.dispatch(progressAction.incProgressbars());
     this.store.dispatch(addPersonal(this._formGroup.value))
     this.router.navigate(['signup/image']); 
   }

@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Signup } from '../../../models/signup';
 
 export interface Personal {
     fname: string;

@@ -34,9 +34,6 @@ export class ImageComponent implements OnInit {
   }
 
   nextButton(): void {
-    //this.image.pic = imgToBase64(image.pic);
-    //image.sigpic = imgToBase64(image.sigpic)
-    
     this.store.dispatch(addImage(this.img));
     this.store.dispatch(progressAction.incProgressbars());
     this.router.navigate(['signup/success']); 
