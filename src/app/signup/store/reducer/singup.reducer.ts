@@ -63,6 +63,6 @@ export const signupReducer = createReducer(
   ),
 );
 
-export function reducer(state: Signup, action: Action) {
+export function reducer(state: Signup | undefined, action: Action) {
   return signupReducer(state, action);
 }

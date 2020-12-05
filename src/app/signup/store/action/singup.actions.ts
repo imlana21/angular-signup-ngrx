@@ -18,5 +18,3 @@ export const addImage = createAction(
   '[Signup] Add Image',
   props<{pic: any, sigpic: any}>()
 )
-
-//export const setScores = createAction('[Scoreboard Page] Set Scores', props<{game: Game}>());

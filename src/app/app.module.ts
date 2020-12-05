@@ -13,6 +13,7 @@ import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as fromSignupReducer from './signup/store/reducer/singup.reducer';
+import * as fromProgresssReducer from './signup/store/reducer/progressbar.reducer';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import * as fromSignupReducer from './signup/store/reducer/singup.reducer';
     BrowserModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature('signup', fromSignupReducer.reducer),
+    StoreModule.forFeature('progressbar', fromProgresssReducer.reducer),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
@@ -34,3 +36,4 @@ import * as fromSignupReducer from './signup/store/reducer/singup.reducer';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

@@ -1,4 +1,4 @@
-<form id="input">
+<form id="input" [formGroup]="_formGroup">
     <div class="form-card">
         <div class="row">
             <div class="col-7">
@@ -9,9 +9,9 @@
             </div>
         </div> 
         <label class="fieldlabels">Upload Your Photo:</label> 
-        <input type="file" name="pic" accept="image/*"> 
+        <input type="file" formControlName="pic" accept="image/*" (change)="getImage($event, 'pic')"> 
         <label class="fieldlabels">Upload Signature Photo:</label> 
-        <input type="file" name="sigpic" accept="image/*">
+        <input type="file" formControlName="sigpic" accept="image/*" (change)="getImage($event, 'sigpic')">
     </div> 
     <input type="button" name="next" class="next action-button" value="Submit" (click)="nextButton()" /> 
     <input type="button" name="previous" class="previous action-button-previous" value="Previous" (click)="prevButton()" />

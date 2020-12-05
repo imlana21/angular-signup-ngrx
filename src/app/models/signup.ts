@@ -1,3 +1,5 @@
+import { promise } from 'protractor';
+
 export interface Signup {
     personal: {
       fname: string,
@@ -12,7 +14,7 @@ export interface Signup {
       cpwd: string
     };
     image: {
-      pic: string,
-      sigpic: string
+      pic: any,
+      sigpic: any
     }
   }
