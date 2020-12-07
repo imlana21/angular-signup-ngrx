@@ -14,9 +14,11 @@
         <input type="text" formControlName="lname" placeholder="Last Name" /> 
         <label class="fieldlabels">Contact No.: *</label> 
         <input type="text" formControlName="phno" placeholder="Contact No." /> 
-        <label class="fieldlabels">Alternate Contact No.: *</label> 
+        <label class="fieldlabels">Alternate Contact No.: </label> 
         <input type="text" formControlName="phno_2" placeholder="Alternate Contact No." />
     </div> 
     <input type="button" name="next" class="next action-button" value="Next" (click)="nextButton()" />
     <input type="button" name="previous" class="previous action-button-previous" value="Previous" (click)="prevButton()" />
 </form>
+
+<app-toastr></app-toastr>

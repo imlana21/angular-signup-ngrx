@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Progressbar } from 'src/app/models/progressbar';
 import { Signup } from '../../models/signup';
+import { setProgressbars } from '../store/action/progressbar.actions';
 import { addImage } from '../store/action/singup.actions';
 
 @Component({
@@ -20,7 +22,8 @@ export class ImageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<Signup>
+    private store: Store<Signup>,
+    private progressStore: Store<Progressbar>
   ) {
     this._formGroup = this.formBuilder.group({
       pic: new FormControl(null), 
@@ -29,6 +32,12 @@ export class ImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(
+      () => {
+        this.progressStore.dispatch(setProgressbars({progress: 3}))
+      },
+      20
+    );
   }
 
   nextButton(): void {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
-import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbProgressbarModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Component
 import { ProgressbarComponent } from './_component/progressbar/progressbar.component';
@@ -11,6 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { ImageComponent } from './image/image.component';
 import { PersonalComponent } from './personal/personal.component';
 import { SuccessComponent } from './success/success.component';
+import { ToastrComponent } from './_component/toastr/toastr.component';
 
 // NgRx Store
 import { StoreModule } from '@ngrx/store';
@@ -29,7 +30,7 @@ import * as fromProgresssReducer from '../signup/store/reducer/progressbar.reduc
     ImageComponent, 
     PersonalComponent, 
     SuccessComponent, 
-    ProgressbarComponent
+    ProgressbarComponent, ToastrComponent
   ],
   imports:[
     CommonModule,
@@ -37,6 +38,7 @@ import * as fromProgresssReducer from '../signup/store/reducer/progressbar.reduc
     FormsModule,
     AppRoutingModule,
     NgbProgressbarModule,
+    NgbToastModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreModule.forFeature('signup', fromSignupReducer.reducer),
     StoreModule.forFeature('progressbar', fromProgresssReducer.reducer),

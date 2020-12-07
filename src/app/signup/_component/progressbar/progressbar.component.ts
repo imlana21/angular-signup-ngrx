@@ -29,7 +29,7 @@ export class ProgressbarComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.store.select(getProgressBar).forEach( async data => {
+    this.store.select(getProgressBar).forEach( data => {
       this.progressNumber = data;
       if(data !=0 ) {
         this.renderer.setAttribute(

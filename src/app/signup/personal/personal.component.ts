@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Progressbar } from 'src/app/models/progressbar';
+import { ToastrService } from 'src/app/services/toastr.service';
 import { Signup } from '../../models/signup';
 import { setProgressbars } from '../store/action/progressbar.actions';
 import { addPersonal } from '../store/action/singup.actions';
@@ -20,12 +21,13 @@ export class PersonalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private store: Store<Signup>,
-    private progressStore: Store<Progressbar>
+    private progressStore: Store<Progressbar>,
+    private toastr: ToastrService
   ) { 
     this._formGroup = this.formBuilder.group({
-      fname: new FormControl(null), 
-      lname: new FormControl(null), 
-      phno: new FormControl(null), 
+      fname: new FormControl(null, Validators.required), 
+      lname: new FormControl(null, Validators.required), 
+      phno: new FormControl(null, Validators.required), 
       phno_2: new FormControl(null)
     });
 
@@ -42,8 +44,12 @@ export class PersonalComponent implements OnInit {
   }
 
   nextButton(): void {
-    this.store.dispatch(addPersonal(this._formGroup.value))
-    this.router.navigate(['signup/image']); 
+    if(this._formGroup.valid) {
+      this.store.dispatch(addPersonal(this._formGroup.value))
+      this.router.navigate(['signup/image']); 
+    } else {
+      this.toastr.show('', 'Form required')
+    }
   }
 
   prevButton(): void {

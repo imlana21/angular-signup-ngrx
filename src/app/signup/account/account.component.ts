@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Progressbar } from 'src/app/models/progressbar';
+import { ToastrService } from 'src/app/services/toastr.service';
 import { Signup } from '../../models/signup';
 import { setProgressbars } from '../store/action/progressbar.actions';
 import { addAccount } from '../store/action/singup.actions';
@@ -21,7 +22,8 @@ export class AccountComponent implements OnInit, AfterViewInit {
     private router: Router,
     private formStore: Store<Signup>,
     private progressStore: Store<Progressbar>,
-    private elementRefs: ElementRef
+    private elementRefs: ElementRef,
+    private toastr: ToastrService
   ) {
     this._formGroup = this.formBuilder.group({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -38,7 +40,6 @@ export class AccountComponent implements OnInit, AfterViewInit {
       },
       20
     );
-    console.log(this.elementRefs.nativeElement.children[0].children[1]);
   } 
 
   nextButton(): void {
@@ -46,7 +47,11 @@ export class AccountComponent implements OnInit, AfterViewInit {
       this.formStore.dispatch(addAccount(this._formGroup.value));
       this.router.navigate(['signup/personal']);
     } else {
-      
+      if( !this._formGroup.get('email').valid ) {
+        this.toastr.show('', 'Format Email Salah')
+      } else {
+        this.toastr.show('', 'Form required')
+      }
     }
   }
 
