@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { props, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Signup } from '../../models/signup';
 import { addImage } from '../store/action/singup.actions';
-import * as progressAction from '../store/action/progressbar.actions';
-import { read } from 'fs';
 
 @Component({
   selector: 'app-image',
@@ -35,7 +33,6 @@ export class ImageComponent implements OnInit {
 
   nextButton(): void {
     this.store.dispatch(addImage(this.img));
-    this.store.dispatch(progressAction.incProgressbars());
     this.router.navigate(['signup/success']); 
   }
   

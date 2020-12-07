@@ -1,41 +1,56 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Progressbar } from 'src/app/models/progressbar';
 import { Signup } from '../../models/signup';
+import { setProgressbars } from '../store/action/progressbar.actions';
 import { addAccount } from '../store/action/singup.actions';
-import * as progressAction from '../store/action/progressbar.actions';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements OnInit, AfterViewInit {
   public _formGroup: FormGroup;
+  @ViewChild('nextBt') next: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<Signup>
+    private formStore: Store<Signup>,
+    private progressStore: Store<Progressbar>,
+    private elementRefs: ElementRef
   ) {
     this._formGroup = this.formBuilder.group({
-      email: new FormControl(null),
-      uname: new FormControl(null),
-      pwd: new FormControl(null),
-      cpwd: new FormControl(null)
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      uname: new FormControl(null, Validators.required),
+      pwd: new FormControl(null, Validators.required),
+      cpwd: new FormControl(null, Validators.required)
     });
   }
 
   ngOnInit(): void {
-  }
+    setTimeout(
+      () => {
+        this.progressStore.dispatch(setProgressbars({progress: 1}))
+      },
+      20
+    );
+    console.log(this.elementRefs.nativeElement.children[0].children[1]);
+  } 
 
   nextButton(): void {
-    this.store.dispatch(progressAction.incProgressbars());
-    this.store.dispatch(addAccount(this._formGroup.value));
-    this.router.navigate(['signup/personal']);
+    if(this._formGroup.valid) {
+      this.formStore.dispatch(addAccount(this._formGroup.value));
+      this.router.navigate(['signup/personal']);
+    } else {
+      
+    }
   }
 
   ngAfterViewInit(): void {
+    console.log(this.next);
   }
 }

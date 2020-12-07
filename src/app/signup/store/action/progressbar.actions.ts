@@ -4,13 +4,10 @@ export const loadProgressbars = createAction(
   '[Progressbar] Load Progressbars'
 );
 
-export const incProgressbars = createAction(
-  '[Progressbar] Increment Progressbars'
+export const setProgressbars = createAction(
+  '[Progressbar] Set Progressbars',
+  props<{progress: number}>()
 );
-
-export const decProgressbars = createAction(
-  '[Progressbar] Decrement Progressbars'
-)
 
 
 

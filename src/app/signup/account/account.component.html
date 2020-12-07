@@ -9,13 +9,13 @@
             </div>
         </div> 
         <label class="fieldlabels">Email: *</label> 
-        <input type="email" formControlName="email" placeholder="Email Id" /> 
+        <input type="email" formControlName="email" placeholder="Email Id" required/> 
         <label class="fieldlabels">Username: *</label> 
-        <input type="text" formControlName="uname" placeholder="UserName" /> 
+        <input type="text" formControlName="uname" placeholder="UserName" required/> 
         <label class="fieldlabels">Password: *</label> 
-        <input type="password" formControlName="pwd" placeholder="Password" /> 
+        <input type="password" formControlName="pwd" placeholder="Password" required/> 
         <label class="fieldlabels">Confirm Password: *</label> 
-        <input type="password" formControlName="cpwd" placeholder="Confirm Password" />
+        <input type="password" formControlName="cpwd" placeholder="Confirm Password" required/>
     </div> 
-    <input type="button" name="next" class="next action-button" value="Next" (click)="nextButton()"/>
+    <input #nextBt type="button" name="next" class="next action-button" value="Next" (click)="nextButton()"/>
 </form>
