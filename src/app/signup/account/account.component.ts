@@ -13,7 +13,7 @@ import { addAccount } from '../store/action/singup.actions';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit, AfterViewInit {
+export class AccountComponent implements OnInit {
   public _formGroup: FormGroup;
   @ViewChild('nextBt') next: ElementRef;
 
@@ -22,7 +22,6 @@ export class AccountComponent implements OnInit, AfterViewInit {
     private router: Router,
     private formStore: Store<Signup>,
     private progressStore: Store<Progressbar>,
-    private elementRefs: ElementRef,
     private toastr: ToastrService
   ) {
     this._formGroup = this.formBuilder.group({
@@ -34,28 +33,26 @@ export class AccountComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.toastr.toasts = [];
     setTimeout(
       () => {
         this.progressStore.dispatch(setProgressbars({progress: 1}))
       },
       20
     );
+    
   } 
 
   nextButton(): void {
-    if(this._formGroup.valid) {
+    if( !this._formGroup.valid) {
+      if( !this._formGroup.get('email').valid ) {
+        this.toastr.show('', 'Format Email Salah');
+      } else {
+        this.toastr.show('', 'Form required');
+      }
+    } else {
       this.formStore.dispatch(addAccount(this._formGroup.value));
       this.router.navigate(['signup/personal']);
-    } else {
-      if( !this._formGroup.get('email').valid ) {
-        this.toastr.show('', 'Format Email Salah')
-      } else {
-        this.toastr.show('', 'Form required')
-      }
     }
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.next);
   }
 }

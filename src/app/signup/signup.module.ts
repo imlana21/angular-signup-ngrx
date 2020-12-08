@@ -30,7 +30,8 @@ import * as fromProgresssReducer from '../signup/store/reducer/progressbar.reduc
     ImageComponent, 
     PersonalComponent, 
     SuccessComponent, 
-    ProgressbarComponent, ToastrComponent
+    ProgressbarComponent, 
+    ToastrComponent
   ],
   imports:[
     CommonModule,

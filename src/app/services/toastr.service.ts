@@ -15,7 +15,9 @@ export class ToastrService {
 
   remove(toast: any) {
     this.toasts = this.toasts.filter(
-      data => data != toast
+      data => {
+        return data !== toast
+      }
     )
   }
 }

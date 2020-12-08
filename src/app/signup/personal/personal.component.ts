@@ -34,9 +34,10 @@ export class PersonalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toastr.toasts = [];
     setTimeout(
       () => {
-        this.progressStore.dispatch(setProgressbars({progress: 2}))
+        this.progressStore.dispatch(setProgressbars({progress: 2}));
       },
       20
     )
@@ -44,11 +45,11 @@ export class PersonalComponent implements OnInit {
   }
 
   nextButton(): void {
-    if(this._formGroup.valid) {
-      this.store.dispatch(addPersonal(this._formGroup.value))
-      this.router.navigate(['signup/image']); 
+    if( !this._formGroup.valid ) {
+      this.toastr.show('', 'Form required');
     } else {
-      this.toastr.show('', 'Form required')
+      this.store.dispatch(addPersonal(this._formGroup.value));
+      this.router.navigate(['signup/image']);       
     }
   }
 
