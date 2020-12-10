@@ -1,8 +1,24 @@
 <!-- progressbar -->
 <ul #ulist id="progress-bar">
-    <li class="" id="account"><strong>Account</strong></li>
-    <li class="" id="personal"><strong>Personal</strong></li>
-    <li class="" id="payment"><strong>Image</strong></li>
-    <li class="" id="confirm"><strong> Preview </strong></li>
+    <li class="" id="account">
+        <a routerLink="account">
+            <strong> Account</strong>
+        </a>
+    </li>
+    <li class="" id="personal">
+        <a routerLink="personal">
+            <strong>Personal</strong>
+        </a>
+    </li>
+    <li class="" id="payment">
+        <a routerLink="image">
+            <strong>Image</strong>
+        </a>
+    </li>
+    <li class="" id="confirm">
+        <a routerLink="success">
+            <strong> Preview </strong>
+        </a>
+    </li>
 </ul>
 <ngb-progressbar [value]="progressNumber" type="info"></ngb-progressbar>

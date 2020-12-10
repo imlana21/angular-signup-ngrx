@@ -7,6 +7,7 @@ import { ToastrService } from 'src/app/services/toastr.service';
 import { Signup } from '../../models/signup';
 import { setProgressbars } from '../store/action/progressbar.actions';
 import { addPersonal } from '../store/action/singup.actions';
+import { getPersonalData } from '../store/selector/signup.selectors';
 
 
 @Component({
@@ -16,11 +17,12 @@ import { addPersonal } from '../store/action/singup.actions';
 })
 export class PersonalComponent implements OnInit {
   public _formGroup: FormGroup;
+  public userPersonal: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<Signup>,
+    private formStore: Store<Signup>,
     private progressStore: Store<Progressbar>,
     private toastr: ToastrService
   ) { 
@@ -34,21 +36,27 @@ export class PersonalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Toastr init
     this.toastr.toasts = [];
+    // Set Animation
     setTimeout(
       () => {
+        // Push Progressbar to Store
         this.progressStore.dispatch(setProgressbars({progress: 2}));
       },
       20
     )
-    
+    // Get Data from Store
+    this.formStore.select(getPersonalData).forEach( data => this.userPersonal = data);
+    this._formGroup.setValue(this.userPersonal);
   }
 
   nextButton(): void {
+    // Cek Valid
     if( !this._formGroup.valid ) {
       this.toastr.show('', 'Form required');
     } else {
-      this.store.dispatch(addPersonal(this._formGroup.value));
+      this.formStore.dispatch(addPersonal(this._formGroup.value));
       this.router.navigate(['signup/image']);       
     }
   }

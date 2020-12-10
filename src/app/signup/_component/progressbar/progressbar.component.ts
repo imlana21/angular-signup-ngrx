@@ -31,6 +31,7 @@ export class ProgressbarComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(getProgressBar).forEach( data => {
       this.progressNumber = data;
+
       if(data !=0 ) {
         this.renderer.setAttribute(
           this.el.nativeElement.children[0].children[data-1], 'class', 'active'

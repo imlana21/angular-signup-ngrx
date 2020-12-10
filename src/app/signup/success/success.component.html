@@ -10,27 +10,27 @@
         </div>  <br>
         <div class="row">
             <label for=""> Email : </label> 
-            <p class="col-12"> ihwan.mualana@students.amikom.ac.id </p>
+            <p class="col-12"> {{ user.account.email }} </p>
         </div>
         <div class="row">
             <label for=""> Username : </label>
-            <p class="col-12"> lana404 </p>
+            <p class="col-12"> {{ user.account.uname }} </p>
         </div>
         <div class="row">
             <label for=""> Password : </label>
-            <p class="col-12"> t3sting </p>
+            <p class="col-12"> {{ user.account.pwd }} </p>
         </div>
         <div class="row">
             <label for=""> Nama : </label>
-            <p class="col-12"> Ihwan Mualana </p>
+            <p class="col-12"> {{ user.personal.fname }} &nbsp; {{ user.personal.lname }}</p>
         </div>
         <div class="row">
             <label for=""> Contact No.: </label>
-            <p class="col-12"> 080000000000 </p>
+            <p class="col-12"> {{ user.personal.phno }} </p>
         </div>
         <div class="row">
             <label for=""> Alternate Contact : </label>
-            <p class="col-12"> 09900989 </p>
+            <p class="col-12"> {{ user.personal.phno_2 }} </p>
         </div>
     </div>
     <button type="button" class="btn btn-dark btn-preview action-button" (click)="previewButton()"> Edit Data </button>

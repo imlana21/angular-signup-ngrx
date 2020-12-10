@@ -7,6 +7,7 @@ import { ToastrService } from 'src/app/services/toastr.service';
 import { Signup } from '../../models/signup';
 import { setProgressbars } from '../store/action/progressbar.actions';
 import { addAccount } from '../store/action/singup.actions';
+import { getAccountData, getPersonalData } from '../store/selector/signup.selectors';
 
 @Component({
   selector: 'app-account',
@@ -15,6 +16,7 @@ import { addAccount } from '../store/action/singup.actions';
 })
 export class AccountComponent implements OnInit {
   public _formGroup: FormGroup;
+  public userAccount: any;
   @ViewChild('nextBt') next: ElementRef;
 
   constructor(
@@ -33,14 +35,19 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Init Toastr
     this.toastr.toasts = [];
+    // Animation Progressbar
     setTimeout(
       () => {
+        // Push Data ke Store
         this.progressStore.dispatch(setProgressbars({progress: 1}))
       },
       20
     );
-    
+    // Get data from Store
+    this.formStore.select(getAccountData).forEach( data => this.userAccount = data);
+    this._formGroup.setValue(this.userAccount)
   } 
 
   nextButton(): void {
