@@ -7,7 +7,7 @@ import { ToastrService } from 'src/app/services/toastr.service';
 import { Signup } from '../../models/signup';
 import { setProgressbars } from '../store/action/progressbar.actions';
 import { addAccount } from '../store/action/singup.actions';
-import { getAccountData, getPersonalData } from '../store/selector/signup.selectors';
+import { getAccountData } from '../store/selector/signup.selectors';
 
 @Component({
   selector: 'app-account',
@@ -47,7 +47,8 @@ export class AccountComponent implements OnInit {
     );
     // Get data from Store
     this.formStore.select(getAccountData).forEach( data => this.userAccount = data);
-    this._formGroup.setValue(this.userAccount)
+    this._formGroup.setValue(this.userAccount);
+    if(this.userAccount === []) this.router.navigate(['signup/personal']);
   } 
 
   nextButton(): void {

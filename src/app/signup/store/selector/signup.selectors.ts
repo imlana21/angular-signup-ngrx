@@ -1,12 +1,5 @@
-import { state } from '@angular/animations';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { stat } from 'fs';
 import { Signup } from 'src/app/models/signup';
-
-// Membuat Interface
-export interface SignupState {
-    userPersonal: Signup;
-}
 
 // Membuat Feature Selector
 export const signupFeatureState = createFeatureSelector<Signup>('signup');

@@ -1,12 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { Progressbar } from 'src/app/models/progressbar';
 
-// Membuat Interface
-export interface ProgressState {
-    progressBar: Progressbar
-}
-
-
 // Membuat Feature Selector
 export const progressBarFeatureState = createFeatureSelector<Progressbar>('progressbar');
 

@@ -8,20 +8,20 @@ export const singupFeatureKey = 'singup';
 
 export const initialState: Signup = {
   personal: {
-    fname: '',
-    lname: '',
-    phno: '',
-    phno_2: ''
+    fname: null,
+    lname: null,
+    phno: null,
+    phno_2: null
   },
   account: {
-    email: '',
-    uname: '',
-    pwd: '',
-    cpwd: ''
+    email: null,
+    uname: null,
+    pwd: null,
+    cpwd: null
   },
   image: {
-    pic: '',
-    sigpic: ''
+    pic: null,
+    sigpic: null
   }
 };
 

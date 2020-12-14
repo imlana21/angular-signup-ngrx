@@ -5,6 +5,7 @@ import { ImageComponent } from './signup/image/image.component';
 import { PersonalComponent } from './signup/personal/personal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SuccessComponent } from './signup/success/success.component';
+import { ActiveFormGuard } from './signup/_utils/active-form.guard';
 
 
 const routes: Routes = [
@@ -13,9 +14,9 @@ const routes: Routes = [
     component: SignupComponent,
     children: [
       { path: 'account', component: AccountComponent },
-      { path: 'personal', component: PersonalComponent },
-      { path: 'image', component: ImageComponent },
-      { path: 'success', component: SuccessComponent },
+      { path: 'personal', component: PersonalComponent, canActivate: [ActiveFormGuard] },
+      { path: 'image', component: ImageComponent, canActivate: [ActiveFormGuard] },
+      { path: 'success', component: SuccessComponent, canActivate: [ActiveFormGuard] },
       { path: '', redirectTo: 'account', pathMatch: 'prefix'}
     ]
    },
